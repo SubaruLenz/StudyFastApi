@@ -5,6 +5,10 @@ from ..connection.database import get_db
 
 router = APIRouter(tags=["CRUD Operations"])
 
+@router.get("/")
+def root(db: Session = Depends(get_db)):
+    return get_item(db)
+
 @router.get("/get")
 def get_item(db: Session = Depends(get_db)):
     data = db.query(models.TestTable).all()
